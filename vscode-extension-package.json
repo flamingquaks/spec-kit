@@ -1,0 +1,604 @@
+{
+  "name": "speckit",
+  "displayName": "SpecKit - Spec-Driven Development",
+  "description": "Transform your development workflow with Spec-Driven Development - visual workflows, AI agent integration, and real-time validation",
+  "version": "1.0.0",
+  "publisher": "github",
+  "icon": "media/icon.png",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other",
+    "Snippets",
+    "Visualization"
+  ],
+  "keywords": [
+    "spec-driven",
+    "specification",
+    "ai",
+    "claude",
+    "copilot",
+    "gemini",
+    "workflow",
+    "documentation",
+    "planning"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/github/spec-kit.git"
+  },
+  "bugs": {
+    "url": "https://github.com/github/spec-kit/issues"
+  },
+  "homepage": "https://github.github.io/spec-kit/",
+  "license": "MIT",
+  "main": "./dist/extension.js",
+  "activationEvents": [
+    "onStartupFinished",
+    "workspaceContains:**/.specify",
+    "onCommand:speckit.initProject"
+  ],
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "speckit",
+          "title": "SpecKit",
+          "icon": "$(symbol-misc)"
+        }
+      ]
+    },
+    "views": {
+      "speckit": [
+        {
+          "id": "speckit.dashboard",
+          "name": "Project Dashboard",
+          "type": "webview",
+          "when": "speckit.projectLoaded"
+        },
+        {
+          "id": "speckit.features",
+          "name": "Features",
+          "when": "speckit.projectLoaded"
+        },
+        {
+          "id": "speckit.templates",
+          "name": "Templates",
+          "when": "speckit.projectLoaded"
+        },
+        {
+          "id": "speckit.getting-started",
+          "name": "Getting Started",
+          "when": "!speckit.projectLoaded"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "speckit.getting-started",
+        "contents": "Welcome to SpecKit! Get started with Spec-Driven Development.\n[Initialize Project](command:speckit.initProject)\n[Open Tutorial](command:speckit.openTutorial)\n[View Documentation](https://github.github.io/spec-kit/)"
+      }
+    ],
+    "commands": [
+      {
+        "command": "speckit.initProject",
+        "title": "Initialize SpecKit Project",
+        "category": "SpecKit",
+        "icon": "$(add)"
+      },
+      {
+        "command": "speckit.openDashboard",
+        "title": "Open Project Dashboard",
+        "category": "SpecKit",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "speckit.createFeature",
+        "title": "Create New Feature",
+        "category": "SpecKit",
+        "icon": "$(new-file)"
+      },
+      {
+        "command": "speckit.openFeature",
+        "title": "Open Feature",
+        "category": "SpecKit"
+      },
+      {
+        "command": "speckit.deleteFeature",
+        "title": "Delete Feature",
+        "category": "SpecKit",
+        "icon": "$(trash)"
+      },
+      {
+        "command": "speckit.createConstitution",
+        "title": "Create Constitution",
+        "category": "SpecKit",
+        "icon": "$(book)"
+      },
+      {
+        "command": "speckit.createSpecification",
+        "title": "Create Specification",
+        "category": "SpecKit",
+        "icon": "$(file-text)"
+      },
+      {
+        "command": "speckit.runClarification",
+        "title": "Run Clarification Workflow",
+        "category": "SpecKit",
+        "icon": "$(question)"
+      },
+      {
+        "command": "speckit.generatePlan",
+        "title": "Generate Implementation Plan",
+        "category": "SpecKit",
+        "icon": "$(layers)"
+      },
+      {
+        "command": "speckit.breakdownTasks",
+        "title": "Break Down Tasks",
+        "category": "SpecKit",
+        "icon": "$(checklist)"
+      },
+      {
+        "command": "speckit.runAnalysis",
+        "title": "Run Consistency Analysis",
+        "category": "SpecKit",
+        "icon": "$(search)"
+      },
+      {
+        "command": "speckit.implement",
+        "title": "Execute Implementation",
+        "category": "SpecKit",
+        "icon": "$(run)"
+      },
+      {
+        "command": "speckit.showWorkflow",
+        "title": "Show Workflow Visualizer",
+        "category": "SpecKit",
+        "icon": "$(graph)"
+      },
+      {
+        "command": "speckit.showQualityDashboard",
+        "title": "Show Quality Dashboard",
+        "category": "SpecKit",
+        "icon": "$(pulse)"
+      },
+      {
+        "command": "speckit.selectAgent",
+        "title": "Select AI Agent",
+        "category": "SpecKit",
+        "icon": "$(robot)"
+      },
+      {
+        "command": "speckit.buildCommand",
+        "title": "Build AI Command",
+        "category": "SpecKit",
+        "icon": "$(tools)"
+      },
+      {
+        "command": "speckit.createBranch",
+        "title": "Create Feature Branch",
+        "category": "SpecKit",
+        "icon": "$(git-branch)"
+      },
+      {
+        "command": "speckit.createPR",
+        "title": "Create Pull Request",
+        "category": "SpecKit",
+        "icon": "$(git-pull-request)"
+      },
+      {
+        "command": "speckit.refresh",
+        "title": "Refresh",
+        "category": "SpecKit",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "speckit.openSettings",
+        "title": "Open Settings",
+        "category": "SpecKit",
+        "icon": "$(settings-gear)"
+      },
+      {
+        "command": "speckit.openTutorial",
+        "title": "Open Interactive Tutorial",
+        "category": "SpecKit",
+        "icon": "$(mortar-board)"
+      },
+      {
+        "command": "speckit.exportDocumentation",
+        "title": "Export Documentation",
+        "category": "SpecKit",
+        "icon": "$(export)"
+      },
+      {
+        "command": "speckit.validateFeature",
+        "title": "Validate Feature",
+        "category": "SpecKit",
+        "icon": "$(check)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "speckit.createFeature",
+          "when": "speckit.projectLoaded"
+        },
+        {
+          "command": "speckit.openFeature",
+          "when": "false"
+        },
+        {
+          "command": "speckit.deleteFeature",
+          "when": "false"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "speckit.createFeature",
+          "when": "view == speckit.features",
+          "group": "navigation"
+        },
+        {
+          "command": "speckit.refresh",
+          "when": "view == speckit.features",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "speckit.openFeature",
+          "when": "view == speckit.features && viewItem == feature",
+          "group": "inline@1"
+        },
+        {
+          "command": "speckit.showWorkflow",
+          "when": "view == speckit.features && viewItem == feature",
+          "group": "1_workflow@1"
+        },
+        {
+          "command": "speckit.showQualityDashboard",
+          "when": "view == speckit.features && viewItem == feature",
+          "group": "1_workflow@2"
+        },
+        {
+          "command": "speckit.createBranch",
+          "when": "view == speckit.features && viewItem == feature",
+          "group": "2_git@1"
+        },
+        {
+          "command": "speckit.createPR",
+          "when": "view == speckit.features && viewItem == feature",
+          "group": "2_git@2"
+        },
+        {
+          "command": "speckit.deleteFeature",
+          "when": "view == speckit.features && viewItem == feature",
+          "group": "9_danger@1"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "speckit.validateFeature",
+          "when": "resourcePath =~ /\\.specify\\/specs\\/.*\\.md$/",
+          "group": "navigation"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "SpecKit",
+      "properties": {
+        "speckit.agent.type": {
+          "type": "string",
+          "enum": [
+            "claude",
+            "gemini",
+            "copilot",
+            "cursor-agent",
+            "qwen",
+            "opencode",
+            "windsurf",
+            "kilocode",
+            "auggie",
+            "roo",
+            "codebuddy",
+            "q",
+            "amp",
+            "shai"
+          ],
+          "default": "claude",
+          "description": "AI agent to use for SpecKit workflows"
+        },
+        "speckit.agent.autoDetect": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically detect installed AI agents"
+        },
+        "speckit.workflow.enforcement": {
+          "type": "string",
+          "enum": ["strict", "guided", "flexible"],
+          "default": "guided",
+          "enumDescriptions": [
+            "Enforce all phase transitions and quality gates",
+            "Show warnings but allow skipping phases",
+            "Minimal validation, maximum flexibility"
+          ],
+          "description": "How strictly to enforce workflow phases"
+        },
+        "speckit.workflow.showVisualizer": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show workflow visualizer panel by default"
+        },
+        "speckit.workflow.autoProgress": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically progress to next phase when current phase is complete"
+        },
+        "speckit.quality.minSpecScore": {
+          "type": "number",
+          "default": 75,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Minimum quality score required for specifications"
+        },
+        "speckit.quality.minPlanScore": {
+          "type": "number",
+          "default": 70,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Minimum quality score required for implementation plans"
+        },
+        "speckit.quality.blockOnViolations": {
+          "type": "boolean",
+          "default": true,
+          "description": "Block phase transitions on constitutional violations"
+        },
+        "speckit.validation.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable real-time validation"
+        },
+        "speckit.validation.delay": {
+          "type": "number",
+          "default": 500,
+          "minimum": 0,
+          "maximum": 5000,
+          "description": "Delay in milliseconds before running validation"
+        },
+        "speckit.validation.autoFix": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically apply fixes when available"
+        },
+        "speckit.editor.showCodeLens": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show CodeLens actions in specification files"
+        },
+        "speckit.editor.showHoverTooltips": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show hover tooltips with additional information"
+        },
+        "speckit.editor.enableAutoComplete": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable auto-completion for SpecKit templates"
+        },
+        "speckit.git.autoCreateBranches": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically create feature branches"
+        },
+        "speckit.git.autoCommit": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically commit changes after phase completion"
+        },
+        "speckit.git.branchPattern": {
+          "type": "string",
+          "default": "{number}-{feature-name}",
+          "description": "Pattern for feature branch names (variables: {number}, {feature-name})"
+        },
+        "speckit.git.featureStartNumber": {
+          "type": "number",
+          "default": 1,
+          "minimum": 1,
+          "description": "Starting number for feature numbering"
+        },
+        "speckit.git.featurePadding": {
+          "type": "number",
+          "default": 3,
+          "minimum": 1,
+          "maximum": 5,
+          "description": "Number of digits for zero-padding feature numbers"
+        },
+        "speckit.analytics.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable quality trend tracking and analytics"
+        },
+        "speckit.analytics.sendAnonymous": {
+          "type": "boolean",
+          "default": false,
+          "description": "Send anonymous usage data to help improve SpecKit"
+        },
+        "speckit.ui.theme": {
+          "type": "string",
+          "enum": ["auto", "light", "dark", "high-contrast"],
+          "default": "auto",
+          "description": "UI theme for SpecKit panels"
+        }
+      }
+    },
+    "languages": [
+      {
+        "id": "speckit-md",
+        "aliases": ["SpecKit Markdown", "speckit"],
+        "extensions": [".md"],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "speckit-md",
+        "scopeName": "text.html.markdown.speckit",
+        "path": "./syntaxes/speckit-markdown.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.yaml": "yaml"
+        }
+      }
+    ],
+    "snippets": [
+      {
+        "language": "speckit-md",
+        "path": "./snippets/speckit.json"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "speckit.createFeature",
+        "key": "ctrl+shift+n",
+        "mac": "cmd+shift+n",
+        "when": "speckit.projectLoaded"
+      },
+      {
+        "command": "speckit.showWorkflow",
+        "key": "ctrl+shift+w",
+        "mac": "cmd+shift+w",
+        "when": "speckit.projectLoaded"
+      },
+      {
+        "command": "speckit.buildCommand",
+        "key": "ctrl+shift+k",
+        "mac": "cmd+shift+k",
+        "when": "speckit.projectLoaded"
+      }
+    ],
+    "colors": [
+      {
+        "id": "speckit.phaseCompleted",
+        "description": "Color for completed workflow phases",
+        "defaults": {
+          "dark": "#4caf50",
+          "light": "#2e7d32",
+          "highContrast": "#00ff00"
+        }
+      },
+      {
+        "id": "speckit.phaseInProgress",
+        "description": "Color for current workflow phase",
+        "defaults": {
+          "dark": "#2196f3",
+          "light": "#1565c0",
+          "highContrast": "#0080ff"
+        }
+      },
+      {
+        "id": "speckit.phaseBlocked",
+        "description": "Color for blocked workflow phases",
+        "defaults": {
+          "dark": "#ff9800",
+          "light": "#e65100",
+          "highContrast": "#ffaa00"
+        }
+      },
+      {
+        "id": "speckit.qualityGood",
+        "description": "Color for good quality scores (>=85)",
+        "defaults": {
+          "dark": "#4caf50",
+          "light": "#2e7d32",
+          "highContrast": "#00ff00"
+        }
+      },
+      {
+        "id": "speckit.qualityWarning",
+        "description": "Color for warning quality scores (70-84)",
+        "defaults": {
+          "dark": "#ff9800",
+          "light": "#e65100",
+          "highContrast": "#ffaa00"
+        }
+      },
+      {
+        "id": "speckit.qualityError",
+        "description": "Color for poor quality scores (<70)",
+        "defaults": {
+          "dark": "#f44336",
+          "light": "#c62828",
+          "highContrast": "#ff0000"
+        }
+      }
+    ],
+    "icons": {
+      "speckit-logo": {
+        "description": "SpecKit logo",
+        "default": {
+          "fontPath": "./media/speckit-icons.woff",
+          "fontCharacter": "\\E001"
+        }
+      },
+      "speckit-feature": {
+        "description": "Feature icon",
+        "default": {
+          "fontPath": "./media/speckit-icons.woff",
+          "fontCharacter": "\\E002"
+        }
+      },
+      "speckit-workflow": {
+        "description": "Workflow icon",
+        "default": {
+          "fontPath": "./media/speckit-icons.woff",
+          "fontCharacter": "\\E003"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "test:unit": "jest",
+    "test:integration": "npm run compile-tests && node ./out/test/runTest.js",
+    "deploy": "vsce publish"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/jest": "^29.5.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "20.x",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "@vscode/test-electron": "^2.3.4",
+    "@vscode/vsce": "^2.21.0",
+    "eslint": "^8.50.0",
+    "glob": "^10.3.3",
+    "jest": "^29.7.0",
+    "mocha": "^10.2.0",
+    "ts-jest": "^29.1.1",
+    "ts-loader": "^9.4.4",
+    "typescript": "^5.2.2",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@vscode/webview-ui-toolkit": "^1.2.2",
+    "execa": "^8.0.1",
+    "gray-matter": "^4.0.3",
+    "handlebars": "^4.7.8",
+    "marked": "^9.1.0",
+    "simple-git": "^3.20.0",
+    "zod": "^3.22.4"
+  }
+}
